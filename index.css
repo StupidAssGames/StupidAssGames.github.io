@@ -1,0 +1,193 @@
+:root {
+    --bg-color: #050505;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --accent-color: #7000ff;
+    --accent-glow: rgba(112, 0, 255, 0.4);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --font-main: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Background Animations */
+.background-blobs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(80px);
+}
+
+.blob {
+    position: absolute;
+    width: 40vw;
+    height: 40vw;
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: move-blobs 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blob-1 {
+    background: var(--accent-color);
+    top: -10%;
+    left: -10%;
+}
+
+.blob-2 {
+    background: #00e5ff;
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+}
+
+.blob-3 {
+    background: #ff007a;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 30s;
+}
+
+@keyframes move-blobs {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(10%, 10%) scale(1.1); }
+}
+
+/* Hero Section */
+.hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+.content {
+    max-width: 800px;
+    z-index: 10;
+}
+
+.title {
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.title span {
+    background: linear-gradient(135deg, #7000ff, #00e5ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.subtitle {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    font-weight: 300;
+}
+
+/* Button Styling */
+.button-container {
+    display: inline-flex;
+    padding: 4px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.game-button {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    padding: 1.2rem 2.8rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-radius: 16px;
+    background: #111;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: block;
+    border: 1px solid var(--glass-border);
+}
+
+.button-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    z-index: 2;
+}
+
+.button-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+/* Hover Effects */
+.game-button:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: rgba(112, 0, 255, 0.5);
+    box-shadow: 0 0 40px var(--accent-glow);
+}
+
+.game-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    transition: 0.5s;
+}
+
+.game-button:hover::after {
+    left: 100%;
+}
+
+.game-button:hover .button-icon {
+    transform: translateX(5px);
+}
+
+.game-button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Footer */
+footer {
+    padding: 2rem;
+    text-align: center;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+/* Performance and Responsiveness */
+@media (max-width: 600px) {
+    .hero {
+        padding: 1rem;
+    }
+}
